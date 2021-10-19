@@ -17,6 +17,7 @@ public class BookService {
     BookRepo bookRepo;
 
     public ResponseEntity<List<Book>> getAllBooks() {
+
         //separera felhantering(till egen klass) och själva metoden senare
         try {
             List<Book> books = new ArrayList<Book>();
@@ -29,4 +30,5 @@ public class BookService {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }
