@@ -27,22 +27,30 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    @PostMapping("/createbook")
+    @PostMapping("/create")
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         return bookService.createBook(book);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Book> deleteBook(@RequestParam(required = false) Long id, @RequestParam(required = false) String isbn, @RequestParam(required = false) String title) {
+    public ResponseEntity<Book> deleteBook(@RequestParam(required = false) Long id,
+                                           @RequestParam(required = false) String isbn,
+                                           @RequestParam(required = false) String title) {
         return bookService.deleteLogic(id, isbn, title);
     }
 
     @GetMapping("/find")
-    public ResponseEntity<Optional<Book>> findBook(@RequestParam(required = false) String isbn, @RequestParam(required = false) String title, @RequestParam(required = false) String author, @RequestParam(required = false) String genre, @RequestParam(required = false) Integer publishedYear, @RequestParam(required = false) Integer rating, @RequestParam(required = false) Long id) {
+    public ResponseEntity<List<Book>> findBook(@RequestParam(required = false) String isbn,
+                                               @RequestParam(required = false) String title,
+                                               @RequestParam(required = false) String author,
+                                               @RequestParam(required = false) String genre,
+                                               @RequestParam(required = false) Integer publishedYear,
+                                               @RequestParam(required = false) Integer rating,
+                                               @RequestParam(required = false) Long id) {
         return bookService.findLogic(isbn, title, author, genre, publishedYear, rating, id);
     }
 
-    @PutMapping("/updatebook/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Book> updateBook(@RequestBody Book book, @PathVariable("id") Long id) {
         return bookService.updateBook(book, id);
 
