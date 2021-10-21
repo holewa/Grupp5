@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +22,7 @@ public class BookService {
         try {
             List<Book> books = new ArrayList<>(bookRepo.findAll());
             if (books.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                return new ResponseEntity<>(books,HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (Exception e) {
