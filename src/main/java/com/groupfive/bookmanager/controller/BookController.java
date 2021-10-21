@@ -3,7 +3,7 @@ package com.groupfive.bookmanager.controller;
 import com.groupfive.bookmanager.model.Book;
 import com.groupfive.bookmanager.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,48 +31,19 @@ public class BookController {
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         return bookService.createBook(book);
     }
-    @DeleteMapping("/deletebyid/{id}")
-    public ResponseEntity<Book> deleteBookById(@PathVariable ("id") Long id){
-        return bookService.deleteBookById(id);
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Book> deleteBook(@RequestParam(required = false) Long id, @RequestParam(required = false) String isbn, @RequestParam(required = false) String title) {
+        return bookService.deleteLogic(id, isbn, title);
     }
-    @DeleteMapping("/deletebyisbn/{isbn}")
-    public ResponseEntity<Book> deleteBookByIsbn(@PathVariable ("isbn") String isbn ){
-        return bookService.deleteBookByIsbn(isbn);
+
+    @GetMapping("/find")
+    public ResponseEntity<Optional<Book>> findBook(@RequestParam(required = false) String isbn, @RequestParam(required = false) String title, @RequestParam(required = false) String author, @RequestParam(required = false) String genre, @RequestParam(required = false) Integer publishedYear, @RequestParam(required = false) Integer rating, @RequestParam(required = false) Long id) {
+        return bookService.findLogic(isbn, title, author, genre, publishedYear, rating, id);
     }
-    @DeleteMapping("/deletebytitle/{title}")
-    public ResponseEntity<Book> deleteBookBytitle(@PathVariable ("title") String title ){
-        return bookService.deleteBookByTitle(title);
-    }
-    @GetMapping("/findbookbyauthor/{author}")
-    public ResponseEntity<Optional<Book>> findBookByAuthor(@PathVariable ("author") String author ){
-        return bookService.findBookByAuthor(author);
-    }
-    @GetMapping("/findbookbygenre/{genre}")
-    public ResponseEntity<Optional<Book>> findBookByGenre(@PathVariable ("genre") String genre ){
-        return bookService.findBookByGenre(genre);
-    }
-    @GetMapping("/findbookbyid/{id}")
-    public ResponseEntity<Optional<Book>> findBookById(@PathVariable ("id") Long id ){
-        return bookService.findBookById(id);
-    }
-    @GetMapping("/findbookbyisbn/{isbn}")
-    public ResponseEntity<Optional<Book>> findBookByIsbn(@PathVariable ("isbn") String isbn ){
-        return bookService.findBookByIsbn(isbn);
-    }
-    @GetMapping("/findbookbypublishedyear/{year}")
-    public ResponseEntity<Optional<Book>> findBookByPublishedYear(@PathVariable ("year") Integer publishedYear ){
-        return bookService.findBookByPublishedYear(publishedYear);
-    }
-    @GetMapping("/findbookbyrating/{rating}")
-    public ResponseEntity<Optional<Book>> findBookByRating(@PathVariable ("rating") Integer rating ){
-        return bookService.findBookByRating(rating);
-    }
-    @GetMapping("/findbookbytitle/{title}")
-    public ResponseEntity<Optional<Book>> findBookByTitle(@PathVariable ("title") String title ){
-        return bookService.findBookByTitle(title);
-    }
+
     @PutMapping("/updatebook/{id}")
-    public ResponseEntity<Book> updateBook(@RequestBody Book book, @PathVariable("id") Long id ){
+    public ResponseEntity<Book> updateBook(@RequestBody Book book, @PathVariable("id") Long id) {
         return bookService.updateBook(book, id);
 
     }

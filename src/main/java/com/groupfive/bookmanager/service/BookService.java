@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,6 @@ public class BookService {
 
     public ResponseEntity<Optional<Book>> findBookByIsbn(String isbn) {
         Optional<Book> books = bookRepo.findByIsbn(isbn);
-
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
@@ -54,7 +54,7 @@ public class BookService {
     }
 
     public ResponseEntity<Optional<Book>> findBookByPublishedYear(Integer publishedYear) {
-        Optional<Book> books = bookRepo.findByPublishedYear(publishedYear);
+        Optional<Book> books = bookRepo.findByPublishYear(publishedYear);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
@@ -66,6 +66,32 @@ public class BookService {
     public ResponseEntity<Optional<Book>> findBookById(Long id) {
         Optional<Book> books = bookRepo.findById(id);
         return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Optional<Book>> findLogic(String isbn, String title, String author, String genre, Integer publishedYear, Integer rating, Long id) {
+        if (isbn != null) {
+            return findBookByIsbn(isbn);
+        }
+        if (title != null) {
+            return findBookByTitle(title);
+        }
+        if (author != null) {
+            return findBookByAuthor(author);
+        }
+        if (genre != null) {
+            return findBookByGenre(genre);
+        }
+        if (publishedYear != null) {
+            return findBookByPublishedYear(publishedYear);
+        }
+        if (rating != null) {
+            return findBookByRating(rating);
+        }
+        if (id != null) {
+            return findBookById(id);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     public ResponseEntity<Book> createBook(Book book) {
@@ -114,5 +140,19 @@ public class BookService {
     public ResponseEntity<Book> deleteBookByTitle(String title) {
         bookRepo.deleteByTitle(title);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    public ResponseEntity<Book> deleteLogic(Long id, String isbn, String title) {
+        if (id != null) {
+            return deleteBookById(id);
+        }
+        if (isbn != null) {
+            return deleteBookByIsbn(isbn);
+        }
+        if (title != null) {
+            return deleteBookByTitle(title);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
