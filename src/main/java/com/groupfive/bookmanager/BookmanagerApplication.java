@@ -40,19 +40,19 @@ public class BookmanagerApplication {
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
 
-    /* @Autowired
-    private UserRepository repository;
-
-    // Use this method to insert more users into the DB, which can then be used to authenticate use of the API.
-
-    @PostConstruct
-    public void initUsers() {
-        List<User> users = Stream.of(
-                new User(101L, "lindo", "password", "lindoembla@gmail.com"),
-                new User(102L, "user1", "pwd1", "user1@gmail.com"),
-                new User(103L, "user2", "pwd2", "user2@gmail.com"),
-                new User(104L, "user3", "pwd3", "user3@gmail.com")
-                ).collect(Collectors.toList());
-        repository.saveAll(users);
-    }*/
+//     @Autowired
+//    private UserRepository repository;
+//
+//    // Use this method to insert more users into the DB, which can then be used to authenticate use of the API.
+//
+//    @PostConstruct
+//    public void initUsers() {
+//        List<User> users = Stream.of(
+//                new User(101L, "lindo", "password", "lindoembla@gmail.com"),
+//                new User(102L, "holewa", "password", "holewa@gmail.com"),
+//                new User(103L, "user2", "pwd2", "user2@gmail.com"),
+//                new User(104L, "user3", "pwd3", "user3@gmail.com")
+//                ).collect(Collectors.toList());
+//        repository.saveAll(users);
+//    }
 }
