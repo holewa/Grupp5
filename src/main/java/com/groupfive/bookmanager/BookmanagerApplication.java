@@ -1,5 +1,8 @@
 package com.groupfive.bookmanager;
 
+import com.groupfive.bookmanager.model.User;
+import com.groupfive.bookmanager.repo.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +10,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import javax.annotation.PostConstruct;
+import java.awt.dnd.MouseDragGestureRecognizer;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 public class BookmanagerApplication {
@@ -31,4 +39,20 @@ public class BookmanagerApplication {
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
+
+    /* @Autowired
+    private UserRepository repository;
+
+    // Use this method to insert more users into the DB, which can then be used to authenticate use of the API.
+
+    @PostConstruct
+    public void initUsers() {
+        List<User> users = Stream.of(
+                new User(101L, "lindo", "password", "lindoembla@gmail.com"),
+                new User(102L, "user1", "pwd1", "user1@gmail.com"),
+                new User(103L, "user2", "pwd2", "user2@gmail.com"),
+                new User(104L, "user3", "pwd3", "user3@gmail.com")
+                ).collect(Collectors.toList());
+        repository.saveAll(users);
+    }*/
 }

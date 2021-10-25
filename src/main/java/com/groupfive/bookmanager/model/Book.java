@@ -17,4 +17,5 @@ public class Book {
     private String imgUrl;
     private Integer publishYear;
     private Integer rating;
+
 }

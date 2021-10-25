@@ -1,10 +1,14 @@
 package com.groupfive.bookmanager.controller;
 
+import com.groupfive.bookmanager.model.AuthRequest;
 import com.groupfive.bookmanager.model.Book;
 import com.groupfive.bookmanager.service.BookService;
+import com.groupfive.bookmanager.utility.JwtUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +22,26 @@ public class BookController {
     @Autowired
     private final BookService bookService;
 
+    @Autowired
+    private JwtUtility jwtUtility;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     public BookController(BookService bookService) {
         this.bookService = bookService;
+    }
+
+    @PostMapping("/authenticate")
+    public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassWord())
+            );
+        } catch (Exception e) {
+            throw new Exception("Invalid username or password");
+        }
+        return jwtUtility.generateToken(authRequest.getUserName());
     }
 
     @GetMapping("/findall")
