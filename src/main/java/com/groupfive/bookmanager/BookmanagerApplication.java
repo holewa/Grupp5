@@ -50,7 +50,7 @@ public class BookmanagerApplication {
 //        List<User> users = Stream.of(
 //                new User(101L, "lindo", "password", "lindoembla@gmail.com"),
 //                new User(102L, "holewa", "password", "holewa@gmail.com"),
-//                new User(103L, "user2", "pwd2", "user2@gmail.com"),
+//                new User(103L, "mo", "password", "mo@gmail.com"),
 //                new User(104L, "user3", "pwd3", "user3@gmail.com")
 //                ).collect(Collectors.toList());
 //        repository.saveAll(users);

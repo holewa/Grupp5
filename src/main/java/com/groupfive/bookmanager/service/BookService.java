@@ -174,6 +174,8 @@ public class BookService {
                     bookUpdate.setIsbn(book.getIsbn());
                 } else if (book.getTitle() != null) {
                     bookUpdate.setTitle(book.getTitle());
+                }else if (book.getImgUrl() != null) {
+                    bookUpdate.setImgUrl(book.getImgUrl());
                 } else if (book.getRating() != null) {
                     bookUpdate.setRating(book.getRating());
                 } else if (book.getPublishYear() != null) {
