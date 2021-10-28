@@ -168,15 +168,17 @@ public class BookService {
                 Book bookUpdate = bookData.get();
                 if (book.getAuthor() != null) {
                     bookUpdate.setAuthor(book.getAuthor());
-                } else if (book.getGenre() != null) {
+                } if (book.getGenre() != null) {
                     bookUpdate.setGenre(book.getGenre());
-                } else if (book.getIsbn() != null) {
+                } if (book.getIsbn() != null) {
                     bookUpdate.setIsbn(book.getIsbn());
-                } else if (book.getTitle() != null) {
+                } if (book.getTitle() != null) {
                     bookUpdate.setTitle(book.getTitle());
-                } else if (book.getRating() != null) {
+                } if (book.getImgUrl() != null) {
+                    bookUpdate.setImgUrl(book.getImgUrl());
+                } if (book.getRating() != null) {
                     bookUpdate.setRating(book.getRating());
-                } else if (book.getPublishYear() != null) {
+                } if (book.getPublishYear() != null) {
                     bookUpdate.setPublishYear(book.getPublishYear());
                 }
                 return new ResponseEntity<>(bookRepo.save(bookUpdate), HttpStatus.OK);
